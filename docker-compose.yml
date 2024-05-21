@@ -32,10 +32,12 @@
       image: nginx
       ports:
         - 80:80
+        - 443:443
       volumes:
-        - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+        - ./nginx/nginx_ssl/nginx.conf:/etc/nginx/nginx.conf
         - static_volume:/usr/src/app/back-static
         - media_volumes:/usr/src/app/back-media
+        - /etc/letsencrypt:/etc/letsencrypt
       depends_on:
         - django
 
@@ -43,3 +45,4 @@
     static_volume:
     media_volumes:
     db_data:
+
