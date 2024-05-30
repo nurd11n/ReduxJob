@@ -9,11 +9,12 @@ SECRET_KEY = config('SECRET_KEY')
 
 DEBUG = config('DEBUG', default=False)
 
-ALLOWED_HOSTS = ['34.89.239.80']
+ALLOWED_HOSTS = ['34.134.125.114', 'taabaldyevnurdin.pp.ua', '*']
 
 AUTH_USER_MODEL = 'account.User'
 
 INSTALLED_APPS = [
+    "jazzmin",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -72,23 +73,23 @@ WSGI_APPLICATION = 'config.wsgi.application'
 ASGI_APPLICATION = 'config.asgi.application'
 
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": BASE_DIR / "db.sqlite3",
-#     }
-# }
-
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": config('DB_NAME'),
-        'USER': config('DB_USER'),
-        "PASSWORD": config('DB_PASS'),
-        'HOST': config('DB_HOST'),
-        'PORT': 5432,
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": config('DB_NAME'),
+#         'USER': config('DB_USER'),
+#         "PASSWORD": config('DB_PASS'),
+#         'HOST': config('DB_HOST'),
+#         'PORT': 5432,
+#     }
+# }
 
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -164,10 +165,36 @@ SWAGGER_SETTINGS = {
     }
 }
 
-CORS_ALLOWED_ORIGINS = ['http://localhost:3000', 'http://127.0.0.1:3000' ]
+CORS_ALLOWED_ORIGINS = ['http://localhost:3000', 'http://127.0.0.1:3000', "http://34.134.125.114:3000", 'http://taabaldyevnurdin.pp.ua:3000', "https://34.134.125.114:3000", 'https://taabaldyevnurdin.pp.ua:3000']
 
 CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOW_ALL_ORIGINS = True
 
-CSRF_TRUSTED_ORIGINS=["http://34.89.239.80"]
+CSRF_TRUSTED_ORIGINS=["http://34.134.125.114", 'http://taabaldyevnurdin.pp.ua', "https://34.134.125.114", 'https://taabaldyevnurdin.pp.ua']
+
+
+JAZZMIN_SETTINGS = {
+    "site_header": "ReduxJob",
+    "site_brand": "ReduxJob",
+    "welcome_sign": "Welcome to the library",
+    "search_model": ["auth.User"],
+
+    "topmenu_links": [
+
+        {"name": "Home", "url": "admin:index", "permissions": ["auth.view_user"]},
+
+        {"name": "Support", "url": "https://github.com/farridav/django-jazzmin/issues", "new_window": True},
+
+        {"model": "auth.User"},
+
+        {"model": "apps.history.apps.Posts"},
+    ],
+
+    "usermenu_links": [
+        {"name": "Support", "url": "https://github.com/farridav/django-jazzmin/issues", "new_window": True},
+        {"model": "auth.user"}
+    ],
+
+    "language_chooser": False,
+}
